@@ -41,7 +41,7 @@ jobs:
         env:
           google_sc: ${{ secrets.GOOGLE_SC }}
         run: |
-            echo "google-site-verification: ${google_sc}" > "${google_sc}.html"
+            printf "google-site-verification: ${google_sc}.html" > "${google_sc}.html"
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
