@@ -31,19 +31,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - uses: actions/download-artifact@v4
-        with:
-          name: npm-pack
-          repository: CarlGao4/webmscore
-          github-token: ${{ secrets.GH_PAT }} # token with actions:read permissions on target repo
-          run-id: 14575709935
-      - name: unpack
-        run: tar zxvf webmscore-1.2.1.tgz &&
-             mkdir webmscore &&
-             mv package/* webmscore/ &&
-
-             rm webmscore-1.2.1.tgz &&
-             rmdir package
+      - name: Download webmscore
+        run:
+            curl -SL https://github.com/CarlGao4/webmscore/releases/download/webmscore-4.3.2/webmscore4-4.3.2.tgz > webmscore4-4.3.2.tgz &&
+          	tar -xvzf ./webmscore4-4.3.2.tgz &&
+          	mv ./package ./webmscore &&
+          	rm ./webmscore4-4.3.2.tgz
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
